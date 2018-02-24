@@ -12,9 +12,7 @@ class practice {
             var offsetChar = helperFunction(s.toCharArray()[0], n).toString()
             return offsetChar
         } else {
-            var offsetChar = helperFunction(s.toCharArray()[0], n).toString()
             cipheredString += helperFunction(charArray[0], n)
-
         }
 
         cipheredString += encipher(s.substring(1), n)
