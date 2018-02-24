@@ -21,6 +21,19 @@ class EncipherTest {
 
     }
 
+    @Test
+    fun testHelperUpper() {
+        val result = enciphering.helperFunction('A', 1);
+        assertEquals('B', result)
+    }
+
+    @Test
+    fun testHelperWrapAroundUpper() {
+        val result = enciphering.helperFunction('Z', 1);
+        assertEquals('A', result)
+
+    }
+
 
 
 }
