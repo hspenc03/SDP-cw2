@@ -34,6 +34,16 @@ class EncipherTest {
 
     }
 
+    @Test (expected = IllegalArgumentException::class)
+    fun throwsExceptionforIllegalArgumentn() {
+        enciphering.encipher("abc", 26)
+    }
+
+    @Test (expected = IllegalArgumentException::class)
+    fun throwsExceptionforIllegalArguments() {
+        enciphering.encipher("323", 21)
+    }
+
 
 
 }
