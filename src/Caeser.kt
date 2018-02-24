@@ -42,7 +42,23 @@ class Caeser {
     }
 
     fun findOffset(s: String): Int {
+//make 26 different enciphers and compare which have most e's etc
+        var e = "e"
+        var ascii = e.toInt()
+
+        //var key =
         return 1
+        //return(mostFrequent)
+    }
+
+    fun findTopThreeFrequencies(s: String) {
+        var clean = cleanString(s)
+        var frequencies = groupingFrequency(clean)
+        lateinit var mostFrequent: MutableList<Pair<Char, Int>>
+        for (f in frequencies) {
+            mostFrequent.add(Pair(f.key, f.value))
+        }
+        //mostFrequent.sortBy {  }
     }
 
     fun cleanString(phrase: String):String {
@@ -51,6 +67,12 @@ class Caeser {
                 .filter { it.isLetter() }
                 .forEach { returnString += it }
         return returnString
+    }
+
+    fun groupingFrequency(word: String) : Map<Char, Int> {
+        val words = word.split("")
+        return word.groupingBy {it}.eachCount()
+        //rank rather than frequency
     }
 
 
