@@ -9,8 +9,7 @@ class practice {
 
         // Base case - return if last character in input string
         if (s.length == 1) {
-            var offsetChar = helperFunction(s.toCharArray()[0], n).toString()
-            return offsetChar
+            return helperFunction(s.toCharArray()[0], n).toString()
         } else {
             cipheredString += helperFunction(charArray[0], n)
         }
@@ -20,19 +19,22 @@ class practice {
     }
 
     fun helperFunction(c: Char, n: Int): Char {
-        if(!c.isLetter()) {
-            throw IllegalArgumentException()
+        var limit = 0
+        var result : Char
+        if(c.isLetter()) {
+            result = c + n
+            limit = when(c.isLowerCase()) {
+                true -> 122
+                false -> 90
+            }
+            if (result.toInt() > limit) {
+                result -= 26
+            }
+        } else {
+            result = c
         }
 
-        var limit = 0
-        limit = when(c.isLowerCase()) {
-            true -> 122
-            false -> 90
-        }
-        var result = c + n
-        if (result.toInt() > limit) {
-            result -= 26
-        }
+
         return result
     }
 
