@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 class EncipherTest {
     lateinit var enciphering: practice
     @Before
-    fun intiial() {
+    fun initial() {
        enciphering = practice()
     }
 
@@ -49,5 +49,18 @@ class EncipherTest {
         enciphering.helperFunction('!', 21)
     }
 
+    @Test
+    fun offsetsString() {
+        var expected = "bcd"
+        var result = enciphering.encipher("abc", 1)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun recursiveBaseCase() {
+        var expected = "b"
+        var result = enciphering.encipher("a", 1)
+        assertEquals(expected, result)
+    }
 
 }
