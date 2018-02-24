@@ -37,10 +37,21 @@ class Caeser {
         return result
     }
 
-    fun main(args: Array<String>) {
-        var a = 'a'
-        println(a + 2)
-
+    fun decipher(s: String): String {
+        return encipher(s, 25)
     }
+
+    fun findOffset(s: String): Int {
+        return 1
+    }
+
+    fun cleanString(phrase: String):String {
+        var returnString = ""
+        phrase.toLowerCase().toCharArray()
+                .filter { it.isLetter() }
+                .forEach { returnString += it }
+        return returnString
+    }
+
 
 }
