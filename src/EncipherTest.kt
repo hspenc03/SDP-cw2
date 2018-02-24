@@ -39,14 +39,23 @@ class EncipherTest {
         enciphering.encipher("abc", 26)
     }
 
-    @Test (expected = IllegalArgumentException::class)
-    fun throwsExceptionforIllegalArgumentsNumber() {
-        enciphering.helperFunction('3', 21)
+    @Test
+    fun numberIgnore() {
+        var result = enciphering.helperFunction('1', 21)
+        assertEquals('1', result)
     }
 
-    @Test (expected = IllegalArgumentException::class)
-    fun throwsExceptionforIllegalArgumentsSymbol() {
-        enciphering.helperFunction('!', 21)
+    @Test
+    fun punctuationIgnore() {
+        var result = enciphering.helperFunction('!', 21)
+        assertEquals('!', result)
+    }
+
+    @Test
+    fun mixedStringIgnore() {
+        var result = enciphering.encipher("1 ab", 1)
+        var expected = "1 bc"
+        assertEquals(expected, result)
     }
 
     @Test
@@ -60,6 +69,34 @@ class EncipherTest {
     fun recursiveBaseCase() {
         var expected = "b"
         var result = enciphering.encipher("a", 1)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun offsetsStringUpperCase() {
+        var expected = "BCD"
+        var result = enciphering.encipher("ABC", 1)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun recursiveBaseCaseUpperCase() {
+        var expected = "B"
+        var result = enciphering.encipher("A", 1)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun offsetsStringUpperCaseWrap() {
+        var expected = "YZA"
+        var result = enciphering.encipher("XYZ", 1)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun recursiveBaseCaseUpperCaseWrap() {
+        var expected = "B"
+        var result = enciphering.encipher("Z", 2)
         assertEquals(expected, result)
     }
 
