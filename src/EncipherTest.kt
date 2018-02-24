@@ -2,10 +2,10 @@ import org.junit.*
 import kotlin.test.assertEquals
 
 class EncipherTest {
-    lateinit var enciphering: practice
+    lateinit var enciphering: Caeser
     @Before
     fun initial() {
-       enciphering = practice()
+       enciphering = Caeser()
     }
 
     @Test
@@ -97,6 +97,27 @@ class EncipherTest {
     fun recursiveBaseCaseUpperCaseWrap() {
         var expected = "B"
         var result = enciphering.encipher("Z", 2)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun offsetsStringMixedUpperLower() {
+        var expected = "bBcC"
+        var result = enciphering.encipher("aAbB", 1)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun offsetMixedUpperLowerWrap() {
+        var expected = "zZaA"
+        var result = enciphering.encipher("yYzZ", 1)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun offsetMixedCasesandSymbolsWrap() {
+        var expected = "Bzdrzq bhogdq? H oqdedq Bzdrzq rzkzc."
+        var result = enciphering.encipher("Caesar cipher? I prefer Caesar salad.", 25)
         assertEquals(expected, result)
     }
 
