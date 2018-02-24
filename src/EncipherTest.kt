@@ -35,15 +35,19 @@ class EncipherTest {
     }
 
     @Test (expected = IllegalArgumentException::class)
-    fun throwsExceptionforIllegalArgumentn() {
+    fun throwsExceptionforIllegalArgumentOffsetLimit() {
         enciphering.encipher("abc", 26)
     }
 
     @Test (expected = IllegalArgumentException::class)
-    fun throwsExceptionforIllegalArguments() {
-        enciphering.encipher("323", 21)
+    fun throwsExceptionforIllegalArgumentsNumber() {
+        enciphering.helperFunction('3', 21)
     }
 
+    @Test (expected = IllegalArgumentException::class)
+    fun throwsExceptionforIllegalArgumentsSymbol() {
+        enciphering.helperFunction('!', 21)
+    }
 
 
 }
