@@ -1,7 +1,8 @@
-class practice {
+class Caeser {
     fun encipher(s: String, n: Int): String {
         var cipheredString = ""
 
+        //checks valid input for n
         if(n < 0 || n > 25) {
             throw IllegalArgumentException()
         }
@@ -11,9 +12,10 @@ class practice {
         if (s.length == 1) {
             return helperFunction(s.toCharArray()[0], n).toString()
         } else {
+            //builds string with changed chars
             cipheredString += helperFunction(charArray[0], n)
         }
-
+        //recursive string build with unchanged characters
         cipheredString += encipher(s.substring(1), n)
         return cipheredString
     }
@@ -23,18 +25,15 @@ class practice {
         var result : Char
         if(c.isLetter()) {
             result = c + n
-            limit = when(c.isLowerCase()) {
+            limit = when (c.isLowerCase()) {
                 true -> 122
                 false -> 90
             }
-            if (result.toInt() > limit) {
-                result -= 26
-            }
+            if (result.toInt() > limit) result -= 26
+
         } else {
             result = c
         }
-
-
         return result
     }
 
