@@ -1,9 +1,7 @@
 import org.junit.*
-import java.io.IOException
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
-import kotlin.test.expect
 
 class DecipherTest {
     lateinit var deciphering: Caeser
@@ -46,7 +44,7 @@ class DecipherTest {
 
     @Test
     fun testReadingDictionaryFile() {
-        val dictionary = deciphering.readDictionary();
+        val dictionary = deciphering.readDictionary()
         assertNotNull(dictionary)
         assertTrue(dictionary.size == 100)
         assertTrue(dictionary.contains("the"))
@@ -57,7 +55,6 @@ class DecipherTest {
         val inputString = "this is a test string"
         val result = deciphering.decipher(inputString)
         val expected = deciphering.encipher(inputString, 0)
-        println("This is the result: " + result)
         assertEquals("this is a test string", result)
     }
 
@@ -66,14 +63,14 @@ class DecipherTest {
         deciphering.dictionary = deciphering.readDictionary()
         val input = mutableListOf<String>("time", "to", "use", "people")
         val expected = 4
-        val result = deciphering.checkAgainstDictionary(input);
+        val result = deciphering.checkAgainstDictionary(input)
         assertEquals(expected, result)
     }
 
     @Test
     fun testDecipher() {
         val expected = "time to use people"
-        val input = deciphering.encipher(expected, 1);
+        val input = deciphering.encipher(expected, 1)
         val result = deciphering.decipher(input)
         assertEquals(expected, result)
     }
@@ -81,7 +78,7 @@ class DecipherTest {
     @Test
     fun testDecipherMixedCase() {
         val expected = "Time to use People"
-        val input = deciphering.encipher(expected, 1);
+        val input = deciphering.encipher(expected, 1)
         val result = deciphering.decipher(input)
         assertEquals(expected, result)
     }
@@ -89,7 +86,7 @@ class DecipherTest {
     @Test
     fun testDecipherMixedTypes() {
         val expected = "Time to use 5 People!?"
-        val input = deciphering.encipher(expected, 1);
+        val input = deciphering.encipher(expected, 1)
         val result = deciphering.decipher(input)
         assertEquals(expected, result)
     }

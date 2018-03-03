@@ -1,4 +1,5 @@
 import java.io.File
+import java.io.IOException
 import java.io.InputStream
 import java.util.*
 import kotlin.math.absoluteValue
@@ -77,6 +78,8 @@ class Caeser {
         dictionary = readDictionary()
         var listOfOptions = getListOfPossibleEncodings(s)
         var map : MutableMap<String, Int> = mutableMapOf()
+        var bestWord: String
+
         for (i in listOfOptions) {
             var resultString= ""
             for(w in i) {
@@ -85,28 +88,20 @@ class Caeser {
             resultString = resultString.trim()
             map.put(resultString, checkAgainstDictionary(i));
         }
-        return map.maxBy { it.value }!!.key
 
-        //return listOfOptions[0]
-
-//        val commonestLetter = findLikeliestE(cleanString)
-//        val offset = 101 - commonestLetter!!.toInt()
-//        return when {
-//            offset == 0 -> s
-//            offset < 0 -> encipher(s, offset + 26)
-//            else -> encipher(s, offset)
-//        }
-        return ""
-    }
-
-    fun findOffset(s: String): Int {
-//make 26 different enciphers and compare which have most e's etc
-        var e = "e"
-        var ascii = e.toInt()
-
-        //var key =
-        return 1
-        //return(mostFrequent)
+        // If highest value = 0 (single words, no common words in sentence...) use 'e' char frequency
+        bestWord = if (map.maxBy { it.value }!!.value == 0) {
+            val commonestLetter = findLikeliestE(s)
+            val offset = 101 - commonestLetter!!.toInt()
+            when {
+                offset == 0 -> s
+                offset < 0 -> encipher(s, offset + 26)
+                else -> encipher(s, offset)
+            }
+        } else {
+            map.maxBy { it.value }!!.key
+        }
+        return bestWord
     }
 
     fun cleanString(phrase: String):String {
@@ -119,21 +114,22 @@ class Caeser {
 
     // Returns char value for most frequent letter - add null check?
     fun findLikeliestE(word: String): Char? {
-        val words = word.split("")
         val resultMap = word.groupingBy { it }.eachCount()
         return resultMap.maxBy { it.value }?.key
     }
 
+    // Reads dictionary.txt into set for membership testing
     fun readDictionary() : MutableSet<String> {
         lateinit var wordSet: MutableSet<String>
         try {
             val inputStream: InputStream = File("src/dictionary.txt").inputStream()
             wordSet = mutableSetOf<String>()
             inputStream.bufferedReader().useLines { word -> word.forEach { wordSet.add(it) }}
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             e.printStackTrace()
+            println("File not read properly!")
         }
-        return wordSet;
+        return wordSet
     }
 
 }
