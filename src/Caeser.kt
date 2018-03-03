@@ -1,4 +1,9 @@
+import kotlin.math.absoluteValue
+
 class Caeser {
+
+    data class Item(val letter: Char, val frequency: Int)
+
     fun encipher(s: String, n: Int): String {
         var cipheredString = ""
 
@@ -10,7 +15,7 @@ class Caeser {
 
         // Base case - return if last character in input string
         if (s.length == 1) {
-            return helperFunction(s.toCharArray()[0], n).toString()
+            return helperFunction(charArray[0], n).toString()
         } else {
             //builds string with changed chars
             cipheredString += helperFunction(charArray[0], n)
@@ -38,7 +43,15 @@ class Caeser {
     }
 
     fun decipher(s: String): String {
-        return encipher(s, 25)
+        val cleanString = cleanString(s)
+        val commonestLetter = findLikeliestE(cleanString)
+        val offset = 101 - commonestLetter!!.toInt()
+        return when {
+            offset == 0 -> s
+            offset < 0 -> encipher(s, offset + 26)
+            else -> encipher(s, offset)
+        }
+
     }
 
     fun findOffset(s: String): Int {
@@ -51,16 +64,6 @@ class Caeser {
         //return(mostFrequent)
     }
 
-    fun findTopThreeFrequencies(s: String) {
-        var clean = cleanString(s)
-        var frequencies = groupingFrequency(clean)
-        lateinit var mostFrequent: MutableList<Pair<Char, Int>>
-        for (f in frequencies) {
-            mostFrequent.add(Pair(f.key, f.value))
-        }
-        //mostFrequent.sortBy {  }
-    }
-
     fun cleanString(phrase: String):String {
         var returnString = ""
         phrase.toLowerCase().toCharArray()
@@ -69,11 +72,11 @@ class Caeser {
         return returnString
     }
 
-    fun groupingFrequency(word: String) : Map<Char, Int> {
+    // Returns char value for most frequent letter - add null check?
+    fun findLikeliestE(word: String): Char? {
         val words = word.split("")
-        return word.groupingBy {it}.eachCount()
-        //rank rather than frequency
+        val resultMap = word.groupingBy { it }.eachCount()
+        return resultMap.maxBy { it.value }?.key
     }
-
 
 }

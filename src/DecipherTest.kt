@@ -11,8 +11,8 @@ class DecipherTest {
 
     @Test
     fun singleWord() {
-        val expected = "cat"
-        val input = deciphering.decipher("dbu")
+        val expected = "telescope"
+        val input = deciphering.decipher("ufmftdpqf")
         assertEquals(expected, input)
     }
 
@@ -23,17 +23,22 @@ class DecipherTest {
     }
 
     @Test
-    fun testGroupingCounter() {
-        val word = "butter"
-        val expected = mapOf('b' to 1, 'u' to 1, 't' to 2, 'e' to 1, 'r' to 1)
-        assertEquals(expected, deciphering.groupingFrequency(word))
+    fun testFindLikeliestE() {
+        var input = "eeeeehhhhfff"
+        var result = deciphering.findLikeliestE(input)
+        assertEquals('e', result)
     }
 
     @Test
-    fun testFindOffset() {
-        val word = "eeeeeeeeettttaaa"
-        val expected = 9
-        assertEquals(expected, deciphering.findOffset(word))
+    fun testEFrequencyCipheredUp() {
+        var result = deciphering.decipher("Vjg gpf qh vjg yqtnf")
+        assertEquals("The end of the world", result)
+    }
+
+    @Test
+    fun testEFrequencyCipheredDown() {
+        var result = deciphering.decipher("Pda ajz kb pda sknhz")
+        assertEquals("The end of the world", result)
     }
 
 
