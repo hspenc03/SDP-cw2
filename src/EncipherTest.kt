@@ -59,6 +59,13 @@ class EncipherTest {
     }
 
     @Test
+    fun offSetZero() {
+        var result = enciphering.encipher("abc", 0)
+        var expected = "abc"
+        assertEquals(expected, result)
+    }
+
+    @Test
     fun offsetsString() {
         var expected = "bcd"
         var result = enciphering.encipher("abc", 1)

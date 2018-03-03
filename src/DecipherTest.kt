@@ -50,7 +50,14 @@ class DecipherTest {
         assertNotNull(dictionary)
         assertTrue(dictionary.size == 100)
         assertTrue(dictionary.contains("the"))
+    }
 
+    @Test
+    fun testReturnEncipheredWord() {
+        val inputString = "this is a test string"
+        val result = deciphering.decipher(inputString)
+        val expected = deciphering.encipher(inputString, 0)
+        assertEquals("this is a test string", result)
     }
 
 

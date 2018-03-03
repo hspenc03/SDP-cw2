@@ -47,16 +47,35 @@ class Caeser {
     }
     //map with key as offset and value as score and get the max value
 
-    fun decipher(s: String): String {
-        val cleanString = cleanString(s)
-        val commonestLetter = findLikeliestE(cleanString)
-        val offset = 101 - commonestLetter!!.toInt()
-        return when {
-            offset == 0 -> s
-            offset < 0 -> encipher(s, offset + 26)
-            else -> encipher(s, offset)
+    fun decipherBunchOfStuff(s: String): MutableList<String> {
+        val words = s.split(" ")
+        var resultList: MutableList<String> = mutableListOf()
+        var resultString = ""
+        for (n in 0..25) {
+            for (w in words) {
+                val cleanString = cleanString(w)
+                // Get list of encipher words - need to string back together before adding to resultList
+                resultString = resultString + " " + encipher(cleanString, n)
+//                println("resultString: $resultString")
+            }
+            resultList.add(resultString)
         }
+        return resultList
+    }
 
+
+    fun decipher(s: String): String {
+        var listOfOptions = decipherBunchOfStuff(s)
+        listOfOptions.forEach { println(it)}
+        return ""
+
+//        val commonestLetter = findLikeliestE(cleanString)
+//        val offset = 101 - commonestLetter!!.toInt()
+//        return when {
+//            offset == 0 -> s
+//            offset < 0 -> encipher(s, offset + 26)
+//            else -> encipher(s, offset)
+//        }
     }
 
     fun findOffset(s: String): Int {
