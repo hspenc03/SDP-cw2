@@ -2,34 +2,34 @@ import org.junit.*
 import kotlin.test.assertEquals
 
 class EncipherTest {
-    lateinit var enciphering: Caeser
+    lateinit var enciphering: Caesar
     @Before
     fun initial() {
-       enciphering = Caeser()
+       enciphering = Caesar()
     }
 
     @Test
     fun testHelper() {
-        val result = enciphering.helperFunction('a', 1);
+        val result = enciphering.helperFunction('a', 1)
         assertEquals('b', result)
 
     }
     @Test
     fun testHelperWrapAround() {
-        val result = enciphering.helperFunction('z', 1);
+        val result = enciphering.helperFunction('z', 1)
         assertEquals('a', result)
 
     }
 
     @Test
     fun testHelperUpper() {
-        val result = enciphering.helperFunction('A', 1);
+        val result = enciphering.helperFunction('A', 1)
         assertEquals('B', result)
     }
 
     @Test
     fun testHelperWrapAroundUpper() {
-        val result = enciphering.helperFunction('Z', 1);
+        val result = enciphering.helperFunction('Z', 1)
         assertEquals('A', result)
 
     }
@@ -41,90 +41,90 @@ class EncipherTest {
 
     @Test
     fun numberIgnore() {
-        var result = enciphering.helperFunction('1', 21)
+        val result = enciphering.helperFunction('1', 21)
         assertEquals('1', result)
     }
 
     @Test
     fun punctuationIgnore() {
-        var result = enciphering.helperFunction('!', 21)
+        val result = enciphering.helperFunction('!', 21)
         assertEquals('!', result)
     }
 
     @Test
     fun mixedStringIgnore() {
-        var result = enciphering.encipher("1 ab", 1)
-        var expected = "1 bc"
+        val result = enciphering.encipher("1 ab", 1)
+        val expected = "1 bc"
         assertEquals(expected, result)
     }
 
     @Test
     fun offSetZero() {
-        var result = enciphering.encipher("abc", 0)
-        var expected = "abc"
+        val result = enciphering.encipher("abc", 0)
+        val expected = "abc"
         assertEquals(expected, result)
     }
 
     @Test
     fun offsetsString() {
-        var expected = "bcd"
-        var result = enciphering.encipher("abc", 1)
+        val expected = "bcd"
+        val result = enciphering.encipher("abc", 1)
         assertEquals(expected, result)
     }
 
     @Test
     fun recursiveBaseCase() {
-        var expected = "b"
-        var result = enciphering.encipher("a", 1)
+        val expected = "b"
+        val result = enciphering.encipher("a", 1)
         assertEquals(expected, result)
     }
 
     @Test
     fun offsetsStringUpperCase() {
-        var expected = "BCD"
-        var result = enciphering.encipher("ABC", 1)
+        val expected = "BCD"
+        val result = enciphering.encipher("ABC", 1)
         assertEquals(expected, result)
     }
 
     @Test
     fun recursiveBaseCaseUpperCase() {
-        var expected = "B"
-        var result = enciphering.encipher("A", 1)
+        val expected = "B"
+        val result = enciphering.encipher("A", 1)
         assertEquals(expected, result)
     }
 
     @Test
     fun offsetsStringUpperCaseWrap() {
-        var expected = "YZA"
-        var result = enciphering.encipher("XYZ", 1)
+        val expected = "YZA"
+        val result = enciphering.encipher("XYZ", 1)
         assertEquals(expected, result)
     }
 
     @Test
     fun recursiveBaseCaseUpperCaseWrap() {
-        var expected = "B"
-        var result = enciphering.encipher("Z", 2)
+        val expected = "B"
+        val result = enciphering.encipher("Z", 2)
         assertEquals(expected, result)
     }
 
     @Test
     fun offsetsStringMixedUpperLower() {
-        var expected = "bBcC"
-        var result = enciphering.encipher("aAbB", 1)
+        val expected = "bBcC"
+        val result = enciphering.encipher("aAbB", 1)
         assertEquals(expected, result)
     }
 
     @Test
     fun offsetMixedUpperLowerWrap() {
-        var expected = "zZaA"
-        var result = enciphering.encipher("yYzZ", 1)
+        val expected = "zZaA"
+        val result = enciphering.encipher("yYzZ", 1)
         assertEquals(expected, result)
     }
 
     @Test
     fun offsetMixedCasesandSymbolsWrap() {
-        var expected = "Bzdrzq bhogdq? H oqdedq Bzdrzq rzkzc."
-        var result = enciphering.encipher("Caesar cipher? I prefer Caesar salad.", 25)
+        val expected = "Bzdrzq bhogdq? H oqdedq Bzdrzq rzkzc."
+        val result = enciphering.encipher("Caesar cipher? I prefer Caesar salad.", 25)
         assertEquals(expected, result)
     }
 
