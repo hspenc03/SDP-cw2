@@ -1,8 +1,12 @@
+import java.io.File
+import java.io.InputStream
+import java.util.*
 import kotlin.math.absoluteValue
 
 class Caeser {
 
     data class Item(val letter: Char, val frequency: Int)
+    lateinit var dictionary : Set<String>;
 
     fun encipher(s: String, n: Int): String {
         var cipheredString = ""
@@ -41,6 +45,7 @@ class Caeser {
         }
         return result
     }
+    //map with key as offset and value as score and get the max value
 
     fun decipher(s: String): String {
         val cleanString = cleanString(s)
@@ -77,6 +82,18 @@ class Caeser {
         val words = word.split("")
         val resultMap = word.groupingBy { it }.eachCount()
         return resultMap.maxBy { it.value }?.key
+    }
+
+    fun readDictionary() : MutableSet<String> {
+        lateinit var wordSet: MutableSet<String>
+        try {
+            val inputStream: InputStream = File("src/dictionary.txt").inputStream()
+            wordSet = mutableSetOf<String>()
+            inputStream.bufferedReader().useLines { word -> word.forEach { wordSet.add(it) }}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return wordSet;
     }
 
 }

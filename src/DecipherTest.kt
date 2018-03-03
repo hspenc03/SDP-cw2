@@ -1,5 +1,8 @@
 import org.junit.*
+import java.io.IOException
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 import kotlin.test.expect
 
 class DecipherTest {
@@ -40,6 +43,16 @@ class DecipherTest {
         var result = deciphering.decipher("Pda ajz kb pda sknhz")
         assertEquals("The end of the world", result)
     }
+
+    @Test
+    fun testReadingDictionaryFile() {
+        val dictionary = deciphering.readDictionary();
+        assertNotNull(dictionary)
+        assertTrue(dictionary.size == 100)
+        assertTrue(dictionary.contains("the"))
+
+    }
+
 
 
 }
