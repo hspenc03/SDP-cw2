@@ -45,18 +45,16 @@ class Caeser {
         }
         return result
     }
-    //map with key as offset and value as score and get the max value
 
-    fun decipherBunchOfStuff(s: String): MutableList<String> {
+    fun getListOfPossibleEncodings(s: String): MutableList<MutableList<String>> {
         val words = s.split(" ")
-        var resultList: MutableList<String> = mutableListOf()
-        var resultString = ""
+        var resultList: MutableList<MutableList<String>> = mutableListOf()
+
         for (n in 0..25) {
+            var resultString : MutableList<String> = mutableListOf()
             for (w in words) {
                 val cleanString = cleanString(w)
-                // Get list of encipher words - need to string back together before adding to resultList
-                resultString = resultString + " " + encipher(cleanString, n)
-//                println("resultString: $resultString")
+                resultString.add(encipher(w, n))
             }
             resultList.add(resultString)
         }
@@ -64,10 +62,32 @@ class Caeser {
     }
 
 
+    fun checkAgainstDictionary(listOfWords: MutableList<String>) :Int {
+        var score = 0
+        for(w in listOfWords) {
+            if(dictionary.contains(w)) {
+                score++
+            }
+        }
+
+        return score
+    }
+
     fun decipher(s: String): String {
-        var listOfOptions = decipherBunchOfStuff(s)
-        listOfOptions.forEach { println(it)}
-        return ""
+        dictionary = readDictionary()
+        var listOfOptions = getListOfPossibleEncodings(s)
+        var map : MutableMap<String, Int> = mutableMapOf()
+        for (i in listOfOptions) {
+            var resultString= ""
+            for(w in i) {
+                resultString = resultString + w + " "
+            }
+            resultString = resultString.trim()
+            map.put(resultString, checkAgainstDictionary(i));
+        }
+        return map.maxBy { it.value }!!.key
+
+        //return listOfOptions[0]
 
 //        val commonestLetter = findLikeliestE(cleanString)
 //        val offset = 101 - commonestLetter!!.toInt()
@@ -76,6 +96,7 @@ class Caeser {
 //            offset < 0 -> encipher(s, offset + 26)
 //            else -> encipher(s, offset)
 //        }
+        return ""
     }
 
     fun findOffset(s: String): Int {
