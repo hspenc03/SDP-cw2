@@ -10,26 +10,26 @@ class EncipherTest {
 
     @Test
     fun testHelper() {
-        val result = enciphering.helperFunction('a', 1)
+        val result = enciphering.shiftFunction('a', 1)
         assertEquals('b', result)
 
     }
     @Test
     fun testHelperWrapAround() {
-        val result = enciphering.helperFunction('z', 1)
+        val result = enciphering.shiftFunction('z', 1)
         assertEquals('a', result)
 
     }
 
     @Test
     fun testHelperUpper() {
-        val result = enciphering.helperFunction('A', 1)
+        val result = enciphering.shiftFunction('A', 1)
         assertEquals('B', result)
     }
 
     @Test
     fun testHelperWrapAroundUpper() {
-        val result = enciphering.helperFunction('Z', 1)
+        val result = enciphering.shiftFunction('Z', 1)
         assertEquals('A', result)
 
     }
@@ -41,13 +41,13 @@ class EncipherTest {
 
     @Test
     fun numberIgnore() {
-        val result = enciphering.helperFunction('1', 21)
+        val result = enciphering.shiftFunction('1', 21)
         assertEquals('1', result)
     }
 
     @Test
     fun punctuationIgnore() {
-        val result = enciphering.helperFunction('!', 21)
+        val result = enciphering.shiftFunction('!', 21)
         assertEquals('!', result)
     }
 

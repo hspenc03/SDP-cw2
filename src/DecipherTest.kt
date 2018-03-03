@@ -17,11 +17,11 @@ class DecipherTest {
         assertEquals(expected, input)
     }
 
-    @Test
-    fun testCleanString() {
-        val expected = "thisisconfusing"
-        assertEquals(expected, deciphering.cleanString("this is confusing!"))
-    }
+//    @Test
+//    fun testCleanString() {
+//        val expected = "thisisconfusing"
+//        assertEquals(expected, deciphering.cleanString("this is confusing!"))
+//    }
 
     @Test
     fun testFindLikeliestE() {
