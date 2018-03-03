@@ -9,34 +9,40 @@ class EncipherTest {
     }
 
     @Test
-    fun testHelper() {
+    fun testShift() {
         val result = enciphering.shiftFunction('a', 1)
         assertEquals('b', result)
-
     }
+
     @Test
-    fun testHelperWrapAround() {
+    fun testShiftWrapAround() {
         val result = enciphering.shiftFunction('z', 1)
         assertEquals('a', result)
 
     }
 
     @Test
-    fun testHelperUpper() {
+    fun testShiftUpper() {
         val result = enciphering.shiftFunction('A', 1)
         assertEquals('B', result)
     }
 
     @Test
-    fun testHelperWrapAroundUpper() {
+    fun testShiftWrapAroundUpper() {
         val result = enciphering.shiftFunction('Z', 1)
         assertEquals('A', result)
 
     }
 
     @Test (expected = IllegalArgumentException::class)
-    fun throwsExceptionforIllegalArgumentOffsetLimit() {
+    fun throwsExceptionforIllegalArgumentOffsetLimitHigh() {
         enciphering.encipher("abc", 26)
+    }
+
+
+    @Test (expected = IllegalArgumentException::class)
+    fun throwsExceptionforIllegalArgumentOffsetLimitLow() {
+        enciphering.encipher("abc", -3)
     }
 
     @Test
@@ -122,7 +128,7 @@ class EncipherTest {
     }
 
     @Test
-    fun offsetMixedCasesandSymbolsWrap() {
+    fun offsetMixedCasesAndSymbolsWrap() {
         val expected = "Bzdrzq bhogdq? H oqdedq Bzdrzq rzkzc."
         val result = enciphering.encipher("Caesar cipher? I prefer Caesar salad.", 25)
         assertEquals(expected, result)
