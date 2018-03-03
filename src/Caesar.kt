@@ -20,7 +20,6 @@ class Caesar {
 
     fun encipher(s: String, offset: Int): String {
         var cipheredString = ""
-
         // Input validation
         if (offset < 0 || offset > 25) {
             throw IllegalArgumentException()

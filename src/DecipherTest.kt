@@ -42,7 +42,17 @@ class DecipherTest {
     fun testReadingDictionaryFile() {
         val dictionary = deciphering.readDictionary()
         assertNotNull(dictionary)
-        assertTrue(dictionary.size == 100)
+    }
+
+    @Test
+    fun testReadingDictionaryFileSize() {
+        val dictionary = deciphering.readDictionary()
+        assertTrue(dictionary.size == 1000)
+    }
+
+    @Test
+    fun testReadingDictionaryFileContents() {
+        val dictionary = deciphering.readDictionary()
         assertTrue(dictionary.contains("the"))
     }
 
