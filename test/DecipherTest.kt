@@ -81,6 +81,14 @@ class DecipherTest {
     }
 
     @Test
+    fun testDecipherUnciphered() {
+        val expected = "time to use people"
+        val input = deciphering.encipher(expected, 0)
+        val result = deciphering.decipher(input)
+        assertEquals(expected, result)
+    }
+
+    @Test
     fun testDecipherMixedCase() {
         val expected = "Time to use People"
         val input = deciphering.encipher(expected, 1)
@@ -121,6 +129,33 @@ class DecipherTest {
         val rand = Random()
         for (line in shortList) {
             val input = deciphering.encipher(line, rand.nextInt(26))
+            val result = deciphering.decipher(input)
+            assertEquals(line, result)
+        }
+    }
+
+    @Test
+    fun testRealExamplesLongUnciphered() {
+        for (line in longList) {
+            val input = deciphering.encipher(line, 0)
+            val result = deciphering.decipher(input)
+            assertEquals(line, result)
+        }
+    }
+
+    @Test
+    fun testRealExamplesMidUnciphered() {
+        for (line in midList) {
+            val input = deciphering.encipher(line, 0)
+            val result = deciphering.decipher(input)
+            assertEquals(line, result)
+        }
+    }
+
+    @Test
+    fun testRealExamplesShortUnciphered() {
+        for (line in shortList) {
+            val input = deciphering.encipher(line, 0)
             val result = deciphering.decipher(input)
             assertEquals(line, result)
         }

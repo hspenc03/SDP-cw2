@@ -5,7 +5,12 @@ import java.io.InputStream
 class Caesar {
     var dictionary : Set<String> = readDictionary()
 
-    // Reads dictionary.txt into Set to create list of commonest words
+
+    /**
+     * Reads in a dictionary of the commonest 1000 words in the English language.
+     * Dictionary taken from: {@link https://www.ef.co.uk/english-resources/english-vocabulary/top-1000-words/}
+     * @return a mutuable set of {@link String}
+     */
     fun readDictionary() : MutableSet<String> {
         val wordSet: MutableSet<String> = mutableSetOf()
         try {
@@ -18,6 +23,12 @@ class Caesar {
         return wordSet
     }
 
+    /**
+     * Enciphers a word using a Caesar cipher (shifts characters along alphabet by a given number)
+     * @param s {@link String}
+     * @param offset {@link Int}
+     * @return the input string shifted by the offset value {@link String}
+     */
     fun encipher(s: String, offset: Int): String {
         var cipheredString = ""
         // Input validation
@@ -37,7 +48,12 @@ class Caesar {
         return cipheredString
     }
 
-    // Shifts character according to value of offset
+    /**
+     * Shifts a character along alphabet by a given number
+     * @param c {@link Char}
+     * @param n {@link Int}
+     * @return individual character that has been shifted by offset {@link Char}
+     */
     fun shiftFunction(c: Char, n: Int): Char {
         var result : Char = c
         if (c.isLetter()) {
@@ -52,6 +68,12 @@ class Caesar {
     }
 
     // Decipher encoded string using frequency of common words and characters
+    /**
+     * Takes a ciphered {@link String} and returns the most likely
+     * deciphered based on top 1000 words and character frequency
+     * @param str {@link String}
+     * @return deciphered {@link String}
+     */
     fun decipher(str: String): String {
         val map : MutableMap<String, Int> = mutableMapOf()
 
@@ -76,7 +98,13 @@ class Caesar {
         }
     }
 
-    // Encipher using every possible key value and return list of results
+    /**
+    * Takes a ciphered {@link String}, splits it into individual words,
+     * and find all possible encodings based on a shift value of 0 - 25
+    * @param str {@link String}
+    * @return returns all possible encodings of each word in the ciphered {@link String} in a {@link MutableList}
+     * of a {@link MutableList}
+    */
     private fun listPossibleEncodings(str: String): MutableList<MutableList<String>> {
         val resultList: MutableList<MutableList<String>> = mutableListOf()
         (0..25).forEach { n ->
@@ -87,12 +115,20 @@ class Caesar {
         return resultList
     }
 
-    // Returns score for string based on how many words are found in dictionary.txt
+    /**
+     * Returns score for {@link String} based on how many words are found in dictionary.txt
+     * @param listOfWords {@link MutableList} of {@link String}
+     * @return returns {@link Int} count of words found in dictionary.txt that match the input
+     */
     fun checkAgainstDictionary(listOfWords: MutableList<String>) :Int {
         return listOfWords.count { dictionary.contains(it) }
     }
 
-    // Returns char value for most frequent letter
+    /**
+     * Identifies most common character in the encoded {@link String}
+     * @param word {@link String} single enciphered word
+     * @return {@link Char} most common character in word
+     */
     fun findLikeliestE(word: String): Char {
         return word.groupingBy { it }.eachCount().maxBy { it.value }!!.key
     }
