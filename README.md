@@ -1,4 +1,4 @@
 # SDP-cw2
-Contributers:
-Sarah Vincent - svince04
-Hannah Spencer - hspenc03
+<p>Contributers:</p>
+<p>Sarah Vincent - svince04</p>
+<p>Hannah Spencer - hspenc03</p>
